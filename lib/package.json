@@ -1,0 +1,19 @@
+{
+  "name": "issues-to-json",
+  "version": "1.0.0",
+  "description": "Auto issues list in json.",
+  "license": "MIT",
+  "private": true,
+  "main": "./cjs/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "typings": "./es/index.d.ts",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "@octokit/action": "^2.0.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

@@ -32,4 +32,4 @@ screenshot
 .eslintcache
 
 # build
-/lib/
+#/lib/

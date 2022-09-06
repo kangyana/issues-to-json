@@ -10,8 +10,8 @@ inputs:
     required: true
   layout:
     description: "Specify how to display the issues"
+    default: "list"
     required: false
-    defaulr: "list"
   labels:
     description: "comma-separated labels to filter the issues。Example: bug,ui,@high"
     required: false

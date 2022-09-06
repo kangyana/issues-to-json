@@ -1,0 +1,48 @@
+name: "Auto issues list in json"
+description: "Auto issues list in json"
+author: "kangyana"
+branding:
+  icon: check-circle
+  color: orange
+inputs:
+  GITHUB_TOKEN:
+    description: "token"
+    required: true
+  layout:
+    description: "Specify how to display the issues"
+    required: false
+    defaulr: "list"
+  labels:
+    description: "comma-separated labels to filter the issues。Example: bug,ui,@high"
+    required: false
+  state:
+    description: "state of the issues to filter them (open or closed)"
+    default: "all"
+    required: false
+  creator:
+    description: "The user that created the issue."
+    required: false
+  assignee:
+    description: "Can be the name of a user. Pass in none for issues with no assigned user, and * for issues assigned to any user."
+    required: false
+  mentioned:
+    description: "A user that's mentioned in the issue."
+    required: false
+  sort:
+    description: "What to sort results by. Can be either created, updated, comments."
+    required: false
+  direction:
+    description: "One of asc (ascending) or desc (descending)."
+    required: false
+  since:
+    description: "Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+    required: false
+  per_page:
+    description: "Results per page (max 100)."
+    required: false
+  page:
+    description: "Page number of the results to fetch."
+    required: false
+runs:
+  using: "node12"
+  main: "lib/cjs/index.js"

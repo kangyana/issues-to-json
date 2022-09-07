@@ -2,7 +2,7 @@ import { LABELS } from './constant';
 import getContents from './getContents';
 
 export interface Issue {
-  id: number;
+  number: number;
   title: string;
   labels: string[];
   body: string;
@@ -16,10 +16,10 @@ const getIssues = async () => {
 
   const result = contents.issues
     .map((item) => {
-      const { id, title, labels, body, html_url } = item;
+      const { number, title, labels, body, html_url } = item;
       const labelNames = labels.map((v) => v.name);
       return {
-        id,
+        number,
         title,
         labels: labelNames,
         body,

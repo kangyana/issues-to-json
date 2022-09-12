@@ -56,8 +56,9 @@ const getContents = async () => {
   });
 
   data.forEach(async (item) => {
-    const res = await octokit.issues.listCommentsForRepo({
+    const res = await octokit.issues.listComments({
       ...repository,
+      issue_number: item.number,
     });
     item.nodes = res.data;
   });

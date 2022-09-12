@@ -55,20 +55,28 @@ const getContents = async () => {
     ...query,
   });
 
-  data.forEach(async (item) => {
-    const res = await octokit.issues.listComments({
-      ...repository,
-      ...query,
-      issue_number: item.number,
-    });
-    item.nodes = res.data;
+  // data.forEach(async (item) => {
+  //   const res = await octokit.issues.listComments({
+  //     ...repository,
+  //     ...query,
+  //     issue_number: item.number,
+  //   });
+  //   item.nodes = res.data;
+  // });
+
+  const promiseArr = data.map((item) => {
+    return octokit.issues
+      .listComments({
+        ...repository,
+        ...query,
+        issue_number: item.number,
+      })
+      .then((res) => {
+        item.nodes = res.data;
+      });
   });
 
-  // const { data } = await octokit.issues.listComments({
-  //   ...repository,
-  //   ...query,
-  //   issue_number: 2,
-  // });
+  await Promise.all(promiseArr);
 
   return {
     issues: data,

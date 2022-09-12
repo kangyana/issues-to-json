@@ -55,20 +55,10 @@ const getContents = async () => {
     ...query,
   });
 
-  // data.forEach(async (item) => {
-  //   const res = await octokit.issues.listComments({
-  //     ...repository,
-  //     ...query,
-  //     issue_number: item.number,
-  //   });
-  //   item.nodes = res.data;
-  // });
-
   const promiseArr = data.map((item) => {
     return octokit.issues
       .listComments({
         ...repository,
-        ...query,
         issue_number: item.number,
       })
       .then((res) => {

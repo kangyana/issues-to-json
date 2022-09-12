@@ -1,3 +1,4 @@
+import type { Octokit } from '@octokit/rest/index';
 import { LABELS } from './constant';
 import getContents from './getContents';
 
@@ -6,8 +7,18 @@ export interface Issue {
   title: string;
   labels: string[];
   body: string;
-  html_url: string;
+  url: string;
 }
+
+const formatNodes = (nodes: Octokit.IssuesListCommentsForRepoResponse) => {
+  const result = nodes.map((node) => {
+    const { user, body } = node;
+    const { id, login, html_url } = user;
+    const author = { login, url: html_url };
+    return { id, author, body };
+  });
+  return result;
+};
 
 const getIssues = async () => {
   const contents = await getContents();
@@ -23,8 +34,8 @@ const getIssues = async () => {
         title,
         labels: labelNames,
         body,
-        html_url,
-        nodes,
+        url: html_url,
+        comments: formatNodes(nodes),
       };
     })
     .reduce((prev, cur) => {

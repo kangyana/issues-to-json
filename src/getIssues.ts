@@ -19,6 +19,7 @@ const getIssues = async () => {
       const { number, title, labels, body, html_url } = item;
       const labelNames = labels.map((v) => v.name);
       return {
+        ...item,
         number,
         title,
         labels: labelNames,

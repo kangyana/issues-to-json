@@ -5,5 +5,5 @@ export interface Issue {
     body: string;
     html_url: string;
 }
-declare const getIssues: () => Promise<import("@octokit/rest").Octokit.IssuesListCommentsResponse>;
+declare const getIssues: () => Promise<Record<string, Issue[]>>;
 export default getIssues;

@@ -1,10 +1,10 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-import type { Octokit } from '@octokit/rest/index';
+// import type { Octokit } from '@octokit/rest/index';
 
-interface Issue extends Octokit.IssuesListForRepoResponseItem {
-  nodes?: Octokit.IssuesListCommentsForRepoResponse;
-}
+// interface Issue extends Octokit.IssuesListForRepoResponseItem {
+//   nodes?: Octokit.IssuesListCommentsForRepoResponse;
+// }
 
 const getContents = async () => {
   const token = core.getInput('GITHUB_TOKEN');
@@ -50,17 +50,23 @@ const getContents = async () => {
     }
   }
 
-  const { data }: { data: Issue[] } = await octokit.issues.listForRepo({
+  // const { data }: { data: Issue[] } = await octokit.issues.listForRepo({
+  //   ...repository,
+  //   ...query,
+  // });
+
+  // data.forEach(async (item) => {
+  //   const res = await octokit.issues.listComments({
+  //     ...repository,
+  //     issue_number: item.number,
+  //   });
+  //   item.nodes = res.data;
+  // });
+
+  const { data } = await octokit.issues.listComments({
     ...repository,
     ...query,
-  });
-
-  data.forEach(async (item) => {
-    const res = await octokit.issues.listComments({
-      ...repository,
-      issue_number: item.number,
-    });
-    item.nodes = res.data;
+    issue_number: 1,
   });
 
   return {

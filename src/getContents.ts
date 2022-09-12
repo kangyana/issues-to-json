@@ -66,7 +66,7 @@ const getContents = async () => {
   const { data } = await octokit.issues.listComments({
     ...repository,
     ...query,
-    issue_number: 1,
+    issue_number: 2,
   });
 
   return {

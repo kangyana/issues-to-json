@@ -13,9 +13,9 @@ export interface Issue {
 const formatNodes = (nodes: Octokit.IssuesListCommentsForRepoResponse) => {
   const result = nodes.map((node) => {
     const { user, body } = node;
-    const { id, login, html_url } = user;
+    const { login, html_url } = user;
     const author = { login, url: html_url };
-    return { id, author, body };
+    return { author, body };
   });
   return result;
 };

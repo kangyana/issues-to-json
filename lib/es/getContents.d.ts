@@ -1,8 +1,4 @@
-import type { Octokit } from '@octokit/rest/index';
-interface Issue extends Octokit.IssuesListForRepoResponseItem {
-    nodes?: Octokit.IssuesListCommentsForRepoResponse;
-}
 declare const getContents: () => Promise<{
-    issues: Issue[];
+    issues: import("@octokit/rest").Octokit.IssuesListCommentsResponse;
 }>;
 export default getContents;

@@ -23,7 +23,7 @@ const formatNodes = (nodes: Octokit.IssuesListCommentsForRepoResponse) => {
 const getIssues = async () => {
   const contents = await getContents();
 
-  console.log('Contents has been retrieved.', JSON.stringify(contents));
+  console.log('Contents has been retrieved.');
 
   const result = contents.issues
     .map((item) => {

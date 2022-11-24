@@ -66,7 +66,7 @@ const getContents = async () => {
     issueList.push(...res.data);
     lastTotal = res.data.length;
     // no next page
-  } while (lastTotal !== pageSize);
+  } while (lastTotal === pageSize);
 
   const promiseArr = issueList.map((item) => {
     return octokit.issues

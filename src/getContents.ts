@@ -55,6 +55,9 @@ const getContents = async () => {
     ...query,
   });
 
+  console.log(`pageSize: ${query.per_page}`);
+  console.log(data);
+
   const promiseArr = data.map((item) => {
     return octokit.issues
       .listComments({

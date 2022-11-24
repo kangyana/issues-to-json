@@ -54,6 +54,8 @@ const getContents = async () => {
       ...query,
     });
 
+    console.log(list);
+
     return {
       issues: list.data,
     };

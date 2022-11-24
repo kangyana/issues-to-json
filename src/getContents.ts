@@ -50,13 +50,15 @@ const getContents = async () => {
     }
   }
 
-  const { data }: { data: Issue[] } = await octokit.issues.listForRepo({
+  const resData: { data: Issue[] } = await octokit.issues.listForRepo({
     ...repository,
     ...query,
   });
 
+  const { data } = resData;
+
   console.log(`pageSize: ${query.per_page}`);
-  console.log(data);
+  console.log(resData);
 
   const promiseArr = data.map((item) => {
     return octokit.issues

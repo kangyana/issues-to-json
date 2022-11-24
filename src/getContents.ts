@@ -50,21 +50,13 @@ const getContents = async () => {
     }
   }
 
-  const issueList: Issue[] = [];
-  let lastLength = 0;
-
-  // const { data }: { data: Issue[] } = await octokit.issues.listForRepo({
-  //   ...repository,
-  //   ...query,
-  // });
-
-  // issueList.push(...data);
-  // lastLength = data.length;
-
   // paging load
+  const issueList: Issue[] = [];
+  let lastTotal = 0; // last request response data length
   let page = 0;
   const pageSize = Number(query.per_page);
-  while (page === 0 || lastLength === pageSize) {
+
+  do {
     page += 1;
     const res: { data: Issue[] } = await octokit.issues.listForRepo({
       ...repository,
@@ -72,10 +64,9 @@ const getContents = async () => {
       page,
     });
     issueList.push(...res.data);
-    lastLength = res.data.length;
-  }
-
-  console.log(`total: ${issueList.length}`);
+    lastTotal = res.data.length;
+    // no next page
+  } while (lastTotal !== pageSize);
 
   const promiseArr = issueList.map((item) => {
     return octokit.issues
